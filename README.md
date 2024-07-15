@@ -1,0 +1,1 @@
+# hypothesis-testing-for-scale-parameter-of-exponential-family
