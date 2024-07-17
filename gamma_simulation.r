@@ -12,6 +12,7 @@ theta_1 <- 3
 # calculating critical value
 cv <- critical_value(theta_0, theta_1, r, n, m, alpha)
 
+# performing NHST
 replicates <- 10000
 p <- numeric(replicates)
 for (i in 1:replicates) {
