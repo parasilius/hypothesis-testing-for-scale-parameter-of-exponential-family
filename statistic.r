@@ -1,22 +1,14 @@
-calculate_c <- function(theta_0, theta_1, r, n, m, alpha, e) {
-  target <- if (r > 0) 1 - alpha else alpha
-  c <- 0
-  repeat {
-    #print(c)
-    x_ <- 1 / (theta_1 ^ r - theta_0 ^ r) * log((c + e) * (theta_1 / theta_0) ^ (n * m))
-    ##print(pgamma(x_, shape = n * m / r, scale = 1 / theta_0 ^ r))
-    #if (pgamma(x_, shape = n * m / r, scale = 1 / theta_0 ^ r) > target || c > 1) {
-    if (pgamma(x_, shape = n * m / r, scale = 1 / theta_0 ^ r) > target) {
-      break
-    }
-    c <- c + e
+calculate_c <- function(theta_0, theta_1, r, n, m, alpha) {
+  if (r > 0) {
+    q <- qgamma(1 - alpha, shape = n * m / r, scale = 1 / theta_0 ^ r)
+  } else {
+    q <- qgamma(alpha, shape = n * m / r, scale = 1 / theta_0 ^ r)
   }
-  print(c)
-  c
+  (theta_0 / theta_1) ^ (n * m) * exp((theta_1 ^ r - theta_0 ^ r) * q)
 }
 
-critical_value <- function(theta_0, theta_1, r, n, m, alpha, e = 1e-4) {
-  c <- calculate_c(theta_0, theta_1, r, n, m, alpha, e)
+critical_value <- function(theta_0, theta_1, r, n, m, alpha) {
+  c <- calculate_c(theta_0, theta_1, r, n, m, alpha)
   1 / (theta_1 ^ r - theta_0 ^ r) * log(c * (theta_1 / theta_0) ^ (n * m))
 }
 
