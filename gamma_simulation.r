@@ -7,7 +7,7 @@ m <- -1 * beta
 alpha <- .05
 theta_0 <- 8
 theta_1 <- 3
-cv <- critical_value(theta_0, theta_1, r, n, m, alpha, 10)
+cv <- critical_value(theta_0, theta_1, r, n, m, alpha)
 replicates <- 10000
 p <- numeric(replicates)
 for (i in 1:replicates) {
