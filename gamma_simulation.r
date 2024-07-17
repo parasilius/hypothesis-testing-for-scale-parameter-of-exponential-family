@@ -28,7 +28,7 @@ n2 <- 1000
 power <- 0
 for (i in 1:n2) {
   x <- rgamma(n, beta, scale = theta_1)
-  d <- sum(abs(x))
+  d <- sum(x)
   power <- if (is_in_rejection_region(d, cv, r)) power + 1 else power
 }
 power <- power / n2
