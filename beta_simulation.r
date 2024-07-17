@@ -27,7 +27,7 @@ n2 <- 1000
 power <- 0
 for (i in 1:n2) {
   x <- rbeta(n, shape1 = theta_1, shape2 = 1)
-  d <- sum(abs(x))
+  d <- -1 * sum(log(x))
   power <- if (is_in_rejection_region(d, cv, r)) power + 1 else power
 }
 power <- power / n2
